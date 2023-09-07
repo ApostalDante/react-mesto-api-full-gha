@@ -1,0 +1,13 @@
+.login__question {
+  margin: 15px auto 0;
+  color: #fff;
+  text-align: center;
+  max-width: 358px;
+  font-size: 14px;
+  line-height: normal;
+}
+@media screen and (max-width: 560px) {
+  .login__question {
+    margin-top: 20px;
+  }
+}

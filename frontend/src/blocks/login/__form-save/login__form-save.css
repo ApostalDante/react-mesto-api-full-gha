@@ -1,0 +1,25 @@
+.login__form-save {
+  border: none;
+  margin-top: 216px;
+  padding: 0;
+  width: 358px;
+  height: 50px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  background: #fff;
+  border-radius: 2px;
+}
+.login__form-save:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 560px) {
+  .login__form-save {
+    margin-top: 173px;
+    width: 260px;
+    height: 46px;
+    font-size: 16px;
+    line-height: 17px;
+  }
+}

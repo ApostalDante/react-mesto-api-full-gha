@@ -1,0 +1,5 @@
+.header__links {
+  display: inline;
+  display: flex;
+  justify-content: space-between;
+}

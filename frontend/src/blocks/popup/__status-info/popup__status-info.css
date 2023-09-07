@@ -1,0 +1,16 @@
+.popup__status-info {
+  max-width: 358px;
+  font-size: 24px;
+  margin: 0 auto 60px;
+  font-weight: 900;
+  line-height: normal;
+  text-align: center;
+}
+
+@media screen and (max-width: 560px) {
+  .popup__status-info {
+    max-width: 244px;
+    font-size: 20px;
+    margin-bottom: 50px;
+  }
+}
