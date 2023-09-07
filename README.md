@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 130.193.52.73
+IP-адрес 10.129.0.33
 
-Frontend https://...
+Frontend https://levkin.mesto.frontend.nomoredomainsicu.ru
 
-Backend https://...
+Backend https://levkin.mesto.backend.nomoredomainsicu.ru

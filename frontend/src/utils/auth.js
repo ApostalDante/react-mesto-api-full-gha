@@ -16,7 +16,7 @@ class Auth {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${jwt}`
+        authorization: `Bearer ${jwt}`
       }
     })
       .then(this._checkResponseProcessingServer)
@@ -31,6 +31,9 @@ class Auth {
       body: JSON.stringify({ email, password })
     })
       .then(this._checkResponseProcessingServer)
+      .then((user) => {
+        if (user) localStorage.setItem('token', user.token)
+      })
   };
 
   setUserRegistration(email, password) {
@@ -45,7 +48,7 @@ class Auth {
   }
 };
 
-const auth = new Auth('https://auth.nomoreparties.co');
+const auth = new Auth('http://levkin.mesto.backend.nomoredomainsicu.ru');
 
 
 export default auth;

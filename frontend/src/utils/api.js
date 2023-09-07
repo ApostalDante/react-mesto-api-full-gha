@@ -1,7 +1,6 @@
 class Api {
-  constructor({ link, headers }) {
-    this._link = link;
-    this._headers = headers;
+  constructor(apihUrl) {
+    this._link = apihUrl;
   };
 
   _checkResponseProcessingServer(res) {
@@ -14,42 +13,56 @@ class Api {
 
   getCardsServer() {
     return fetch(`${this._link}cards`, {
-      headers: this._headers,
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(res => { return this._checkResponseProcessingServer(res); })
   };
 
   addNewCardToServer({ name, link }) {
     return fetch(`${this._link}cards`, {
-      headers: this._headers,
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
       body: JSON.stringify({ name, link })
     })
-
       .then(res => { return this._checkResponseProcessingServer(res); })
   };
 
   deleteCardInServer(cardId) {
     return fetch(`${this._link}cards/${cardId}`, {
-      headers: this._headers,
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(res => { return this._checkResponseProcessingServer(res); })
   };
 
   getProfileDataInServer() {
     return fetch(`${this._link}users/me`, {
-      headers: this._headers,
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(res => { return this._checkResponseProcessingServer(res); })
   };
 
   sendProfileDataToServer(profileData) {
     return fetch(`${this._link}users/me`, {
-      headers: this._headers,
       method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
       body: JSON.stringify({ name: profileData.name, about: profileData.description })
     })
       .then(res => { return this._checkResponseProcessingServer(res); })
@@ -57,8 +70,11 @@ class Api {
 
   sendAvatarDataToServer(avatarData) {
     return fetch(`${this._link}users/me/avatar`, {
-      headers: this._headers,
       method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
       body: JSON.stringify({ avatar: avatarData.avatar })
     })
       .then(res => { return this._checkResponseProcessingServer(res); })
@@ -66,30 +82,28 @@ class Api {
 
   sendLikeCardToServer(cardId) {
     return fetch(`${this._link}cards/${cardId}/likes`, {
-      headers: this._headers,
       method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(res => { return this._checkResponseProcessingServer(res); })
   };
 
   deleteLikeCardToServer(cardId) {
     return fetch(`${this._link}cards/${cardId}/likes`, {
-      headers: this._headers,
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(res => { return this._checkResponseProcessingServer(res); })
   };
 };
 
 
-const apiData = {
-  link: 'https://mesto.nomoreparties.co/v1/cohort-64/',
-  headers: {
-    authorization: '3b08e0b6-8adb-49dc-9f21-be9371b35bfc',
-    'Content-Type': 'application/json'
-  }
-};
-
-const api = new Api(apiData);
+const api = new Api('http://levkin.mesto.backend.nomoredomainsicu.ru/');
 
 export default api;
