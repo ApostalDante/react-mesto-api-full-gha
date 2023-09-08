@@ -34,10 +34,15 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
-    Promise.all([api.getProfileDataInServer(), api.getCardsServer()]).then(([dataUser, cardObject]) => {
-      setCurrentUser(dataUser)
-      setCards(cardObject)
-    }).catch(console.error)
+    const token = localStorage.getItem('token');
+    if (token) {
+      Promise.all([api.getProfileDataInServer(), api.getCardsServer()])
+        .then(([dataUser, cardObject]) => {
+          setCurrentUser(dataUser)
+          setCards(cardObject)
+        })
+        .catch(console.error)
+    }
   }, []);
 
   function addCardLike(card) {
@@ -53,7 +58,7 @@ function App() {
   };
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     if (isLiked) {
       deleteCardLike(card);
@@ -117,12 +122,12 @@ function App() {
   };
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.checkToken(jwt).then((res) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth.checkToken(token).then((res) => {
         if (res) {
           setIsLogginIn(true);
-          setEmailUser(res.data.email);
+          setEmailUser(res.email);
         }
       }).catch(console.error);
     }
@@ -139,8 +144,7 @@ function App() {
     auth.setUserRegistration(email, password).then(() => {
       setNoticeImageTooltipPopup(okImg);
       setNoticeTitleTooltipPopup("Вы успешно зарегистрировались!");
-      //  navigate("/sign-in");
-      navigate("/signin");
+      navigate("/sign-in");
     }).catch(() => {
       setNoticeImageTooltipPopup(errorImg);
       setNoticeTitleTooltipPopup("Что-то пошло не так! Попробуйте ещё раз.");
@@ -152,12 +156,13 @@ function App() {
 
   function handleLogin(email, password) {
     setIsLoading(true);
-    auth.setUserAuthorization(email, password).then((res) => {
-      localStorage.setItem("jwt", res.token);
-      setIsLogginIn(true);
-      setEmailUser(email);
-      // navigate("/");
-      navigate("/signup");
+    auth.setUserAuthorization(email, password).then(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        setIsLogginIn(true);
+        setEmailUser(email);
+        navigate("/");
+      }
     }).catch(() => {
       setNoticeImageTooltipPopup(errorImg);
       setNoticeTitleTooltipPopup("Что-то пошло не так! Попробуйте ещё раз.");
@@ -172,8 +177,7 @@ function App() {
   function handleSignout() {
     setIsLogginIn(false);
     setEmailUser(null);
-    navigate("/sign-in");
-    localStorage.removeItem("jwt");
+    localStorage.removeItem('token');
   };
 
   function backnFalseIsLoading() {

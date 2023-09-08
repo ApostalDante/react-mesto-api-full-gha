@@ -16,7 +16,7 @@ class Auth {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${jwt}`
+        Authorization: `Bearer ${jwt}`
       }
     })
       .then(this._checkResponseProcessingServer)
@@ -32,7 +32,7 @@ class Auth {
     })
       .then(this._checkResponseProcessingServer)
       .then((user) => {
-        if (user) localStorage.setItem('token', user.token)
+        if (user.token) localStorage.setItem('token', user.token)
       })
   };
 
