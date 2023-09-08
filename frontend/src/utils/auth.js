@@ -48,7 +48,7 @@ class Auth {
   }
 };
 
-const auth = new Auth('http://levkin.mesto.backend.nomoredomainsicu.ru');
+const auth = new Auth('https://levkin.mesto.backend.nomoredomainsicu.ru');
 
 
 export default auth;

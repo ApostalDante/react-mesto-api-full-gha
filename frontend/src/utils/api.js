@@ -104,6 +104,6 @@ class Api {
 };
 
 
-const api = new Api('http://levkin.mesto.backend.nomoredomainsicu.ru/');
+const api = new Api('https://levkin.mesto.backend.nomoredomainsicu.ru/');
 
 export default api;
