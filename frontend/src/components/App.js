@@ -43,7 +43,7 @@ function App() {
         })
         .catch(console.error)
     }
-  }, []);
+  }, [isLogginIn]);
 
   function addCardLike(card) {
     api.sendLikeCardToServer(card._id).then((newCard) => {
@@ -131,7 +131,7 @@ function App() {
         }
       }).catch(console.error);
     }
-  }, []);
+  }, [isLogginIn]);
 
   React.useEffect(() => {
     if (isLogginIn === true) {
