@@ -1,6 +1,6 @@
 const { celebrate, Joi } = require('celebrate');
 
-const regex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}(?:jpeg|png|ico|gif|webp|bmp|test)|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}(?:jpeg|png|ico|gif|webp|bmp|test)|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}(?:jpeg|png|ico|gif|webp|bmp|test)|www\.[a-zA-Z0-9]+\.[^\s]{2,}(?:jpeg|png|ico|gif|webp|bmp|test))/;
+const regex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
 
 const validateCreateUser = celebrate({
   body: Joi.object().keys({
